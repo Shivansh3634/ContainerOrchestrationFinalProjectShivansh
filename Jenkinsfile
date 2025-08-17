@@ -2,22 +2,25 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+        stage('Docker Login') {
             steps {
-                git branch: 'main', url: 'https://github.com/Shivansh3634/ContainerOrchestrationFinalProjectShivansh.git'
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', 
+                                                  usernameVariable: 'DOCKER_USER', 
+                                                  passwordVariable: 'DOCKER_PASS')]) {
+                    sh "docker login -u $DOCKER_USER -p $DOCKER_PASS"
+                }
             }
         }
 
-        stage('Build Docker') {
+        stage('Build Docker Image') {
             steps {
-                bat 'docker build -t shivansh3634/django-crm:latest "C:\\Users\\shiva\\OneDrive\\Desktop\\Container and orchestration final project\\django-crm"'
+                sh "docker build -t shivansh3634/django-crm:latest ."
             }
         }
 
-        stage('Push Docker') {
+        stage('Push Docker Image') {
             steps {
-                bat 'docker login -u <your-dockerhub-username> -p <your-dockerhub-password>'
-                bat 'docker push shivansh3634/django-crm:latest'
+                sh "docker push shivansh3634/django-crm:latest"
             }
         }
     }
