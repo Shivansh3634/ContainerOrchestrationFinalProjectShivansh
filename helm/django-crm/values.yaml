@@ -1,0 +1,16 @@
+replicaCount: 1
+
+image:
+  repository: shivansh3634/django-crm
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8000
+
+mysql:
+  host: mysql
+  database: crm_db
+  user: crm_user
+  password: crm_pass

@@ -1,0 +1,4 @@
+apiVersion: v2
+name: django-crm
+description: Helm chart for Django CRM
+version: 0.1.0

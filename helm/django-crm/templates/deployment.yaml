@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-crm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: django-crm
+  template:
+    metadata:
+      labels:
+        app: django-crm
+    spec:
+      containers:
+        - name: django-crm
+          image: shivansh3634/django-crm:latest
+          ports:
+            - containerPort: 8000
+          env:
+            - name: MYSQL_HOST
+              value: "mysql-service"      
+            - name: MYSQL_PORT
+              value: "3306"
+            - name: MYSQL_USER
+              value: "root"
+            - name: MYSQL_PASSWORD
+              value: "rootpassword"
+            - name: MYSQL_DB
+              value: "django_crm"
+          command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
