@@ -4,7 +4,8 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Shivansh3634/django-crm.git'
+                git branch: 'main', url: 'https://github.com/Shivansh3634/ContainerOrchestrationFinalProjectShivansh.git'
+
             }
         }
 
