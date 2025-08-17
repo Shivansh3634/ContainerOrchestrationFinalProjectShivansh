@@ -5,33 +5,32 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/Shivansh3634/ContainerOrchestrationFinalProjectShivansh.git'
-
             }
         }
 
         stage('Build') {
             steps {
-                sh 'python -m venv venv'
-                sh './venv/bin/pip install -r requirements.txt'
+                bat 'python -m venv venv'
+                bat 'venv\\Scripts\\pip install -r requirements.txt'
             }
         }
 
         stage('Test') {
             steps {
-                sh './venv/bin/python manage.py test'
+                bat 'venv\\Scripts\\python manage.py test'
             }
         }
 
         stage('Lint') {
             steps {
-                sh './venv/bin/pip install flake8'
-                sh './venv/bin/flake8 .'
+                bat 'venv\\Scripts\\pip install flake8'
+                bat 'venv\\Scripts\\flake8 .'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploy step yahan configure karna hai (e.g. Docker, server push, etc.)'
+                echo 'Deploy step (Docker, server push, etc.)'
             }
         }
     }
