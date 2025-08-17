@@ -8,23 +8,16 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build Docker') {
             steps {
-                bat 'python -m venv venv'
-                bat 'venv\\Scripts\\pip install -r requirements.txt'
+                bat 'docker build -t shivansh3634/django-crm:latest "C:\\Users\\shiva\\OneDrive\\Desktop\\Container and orchestration final project\\django-crm"'
             }
         }
 
-        stage('Test') {
+        stage('Push Docker') {
             steps {
-                bat 'venv\\Scripts\\python manage.py test'
-            }
-        }
-
-        stage('Lint') {
-            steps {
-                bat 'venv\\Scripts\\pip install flake8'
-                bat 'venv\\Scripts\\flake8 .'
+                bat 'docker login -u <your-dockerhub-username> -p <your-dockerhub-password>'
+                bat 'docker push shivansh3634/django-crm:latest'
             }
         }
     }
