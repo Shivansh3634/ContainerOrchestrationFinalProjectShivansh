@@ -27,5 +27,11 @@ pipeline {
                 bat 'venv\\Scripts\\flake8 .'
             }
         }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploy step
+            }
+        }
     }
 }
